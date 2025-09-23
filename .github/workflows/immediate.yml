@@ -1,0 +1,17 @@
+name: Immediate Test
+on: [push, workflow_dispatch]
+
+jobs:
+  immediate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Quick Test
+        run: |
+          echo "Immediate test: $(date)" > immediate.txt
+          curl -s ifconfig.me >> immediate.txt
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: immediate-results
+          path: "immediate.txt"
